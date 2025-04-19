@@ -8,6 +8,7 @@ import shutil
 import time
 from streamlit_webrtc import webrtc_streamer
 import av
+import datetime
 
 # Load the YOLO model
 model = YOLO("./weights/best.pt")
@@ -80,7 +81,8 @@ elif mode == "Live Camera":
 
         if elapsed_time > 5:
             # Take a screenshot and save it before stopping
-            screenshot_path = "./Live Camera Results/img.png"
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            screenshot_path = f"./Live Camera Results/img_{timestamp}.png"
             cv2.imwrite(screenshot_path, img)
             st.success(f"Screenshot saved at {screenshot_path}")
             # Stop streaming by returning None
